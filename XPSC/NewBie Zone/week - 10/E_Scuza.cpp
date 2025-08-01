@@ -12,7 +12,6 @@ int main(){
         for(int i=0; i<n; i++){
             cin >> v[i];
         }
-        sort(v.begin(),v.end());
         vector<ll> prefixSum(n),preMax(n);
         prefixSum[0] = v[0];
         preMax[0] = v[0];
@@ -22,15 +21,10 @@ int main(){
         }
         while(q--){
             int k; cin >> k;
-            if( k == 0){
-                cout << 0 << " ";
-                continue;
-            }
-            auto it = upper_bound(v.begin(),v.end(),k);
-            int idx = it - v.begin();
-            // if(it == v.end() || *it > k) idx--;
-            cout << prefixSum[idx-1] <<" ";
-            // cout << idx-1 <<" ";
+            auto it = upper_bound(preMax.begin(),preMax.end(),k);
+            int idx = it - preMax.begin();
+            if(idx == 0) cout << 0 <<" ";
+            else cout << prefixSum[idx-1] <<" ";
         }
         cout << endl;
     }
